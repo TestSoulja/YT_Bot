@@ -38,11 +38,11 @@ def start(message):
 	btn2 = types.KeyboardButton("_Выключить_")
 	markup.add(btn1, btn2)
 	bot.send_message(message.chat.id, text="Привет!!".format(message.from_user), reply_markup=markup)
+	z = message.text
 
 
 @bot.message_handler(content_types=["text"])
 def func(message):
-	z = message.text
 	if message.text == "_Что я могу?_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
 		btn1 = types.KeyboardButton("_Скачать видео_")
