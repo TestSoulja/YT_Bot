@@ -43,6 +43,7 @@ def start(message):
 
 @bot.message_handler(content_types=["text"])
 def func(message):
+	z = message.text
 	if message.text == "_Что я могу?_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
 		btn1 = types.KeyboardButton("_Скачать видео_")
@@ -59,7 +60,7 @@ def func(message):
 		btn1 = types.KeyboardButton("_Ещё!!!_")
 		btn2 = types.KeyboardButton("_В начало_")
 		markup.add(btn1, btn2)
-		bot.send_photo(message.chat.id, open("/Users/s.ekker/PycharmProjects/Bot/AUF/Wolf/"+ s+"_.jpg", "rb"), reply_markup=markup)
+		bot.send_photo(message.chat.id, open("/root/PycharmProjects/YT_Bot/AUF/"+ s+"_.jpg", "rb"), reply_markup=markup)
 		z = message.text
 	
 	elif message.text == "_Скачать видео_":
