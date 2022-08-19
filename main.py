@@ -22,8 +22,8 @@ import datetime
 
 API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
 APP_HOST = "127.0.0.1"
-APP_PORT = "4040"
-WEB_HOOK_URL = "https://1281-95-165-162-211.ngrok.io"
+APP_PORT = "8444"
+WEB_HOOK_URL = "https://3cae-95-165-162-211.ngrok.io"
 bot = telebot.TeleBot(API_TOKEN)
 logger = telebot.logger
 app = flask.Flask(__name__)
