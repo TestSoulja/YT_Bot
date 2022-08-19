@@ -23,7 +23,7 @@ import datetime
 API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
 APP_HOST = "127.0.0.1"
 APP_PORT = "8444"
-WEB_HOOK_URL = "https://3cae-95-165-162-211.ngrok.io"
+WEB_HOOK_URL = "https://62af-95-165-162-211.ngrok.io"
 bot = telebot.TeleBot(API_TOKEN)
 logger = telebot.logger
 app = flask.Flask(__name__)
@@ -38,6 +38,19 @@ def start(message):
 	btn2 = types.KeyboardButton("_Выключить_")
 	markup.add(btn1, btn2)
 	bot.send_message(message.chat.id, text="Привет!!".format(message.from_user), reply_markup=markup)
+
+
+@bot.message_handler(content_types=["text"])
+def func(message):
+	z = message.text
+	if message.text == "_Что я могу?_":
+		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
+		btn1 = types.KeyboardButton("_Скачать видео_")
+		btn2 = types.KeyboardButton("_Хочу мем_")
+		btn3 = types.KeyboardButton("_В начало_")
+		markup.add(btn1, btn2, btn3)
+		bot.send_message(message.chat.id, text="Воть..".format(message.from_user), reply_markup=markup)
+		z = message.text
 
 
 @app.route("/", methods=["POST"])
