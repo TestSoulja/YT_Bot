@@ -54,6 +54,7 @@ if __name__ == "__main__":
 	bot.remove_webhook()
 	time.sleep(1)
 	bot.set_webhook(url=WEB_HOOK_URL)
+	APP_PORT = int(APP_PORT)
 	app.run(host=APP_HOST, port=APP_PORT, debug=True)
 
 
