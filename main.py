@@ -5,6 +5,9 @@ from pytube import YouTube
 import keyboa
 import requests
 from telebot import types
+import flask
+import time
+import logging
 from random import randint
 import os
 import os.path
@@ -16,8 +19,14 @@ import os.path
 import datetime
 
 # Создаем экземпляр бота
-token = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
-bot = telebot.TeleBot("5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ")
+
+API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
+APP_HOST = "127.0.0.1"
+APP_PORT = "4040"
+WEB_HOOK_URL = "https://1281-95-165-162-211.ngrok.io"
+bot = telebot.TeleBot(API_TOKEN)
+logger = telebot.logger
+app = flask.Flask(__name__)
 
 a = [0]
 
@@ -29,6 +38,23 @@ def start(message):
 	btn2 = types.KeyboardButton("_Выключить_")
 	markup.add(btn1, btn2)
 	bot.send_message(message.chat.id, text="Привет!!".format(message.from_user), reply_markup=markup)
+
+
+@app.route("/", methods=["POST"])
+def webhook():
+	if flask.request.headers.get("content-type") == "application.json":
+		json_string = flask.request.get_data().decode("utf-8")
+		update = telebot.types.Update.de_json(json_string)
+		bot.process_new_updates([update])
+		return ""
+	else:
+		flask.abort(403)
+	
+if __name__ == "__main__":
+	bot.remove_webhook()
+	time.sleep(1)
+	bot.set_webhook(url=WEB_HOOK_URL)
+	app.run(host=APP_HOST, port=APP_PORT, debug=True)
 
 
 @bot.message_handler(content_types=["text"])
