@@ -51,38 +51,6 @@ def func(message):
 		markup.add(btn1, btn2, btn3)
 		bot.send_message(message.chat.id, text="Воть..".format(message.from_user), reply_markup=markup)
 		z = message.text
-
-
-@app.route("/", methods=["POST"])
-def webhook():
-	if flask.request.headers.get("content-type") == "application/json":
-		json_string = flask.request.get_data().decode("utf-8")
-		update = telebot.types.Update.de_json(json_string)
-		bot.process_new_updates([update])
-		return ""
-	else:
-		flask.abort(403)
-	
-	
-if __name__ == "__main__":
-	bot.remove_webhook()
-	time.sleep(1)
-	bot.set_webhook(url=WEB_HOOK_URL)
-	APP_PORT = int(APP_PORT)
-	app.run(host=APP_HOST, port=APP_PORT, debug=True)
-
-
-@bot.message_handler(content_types=["text"])
-def func(message):
-	z = message.text
-	if message.text == "_Что я могу?_":
-		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
-		btn1 = types.KeyboardButton("_Скачать видео_")
-		btn2 = types.KeyboardButton("_Хочу мем_")
-		btn3 = types.KeyboardButton("_В начало_")
-		markup.add(btn1, btn2, btn3)
-		bot.send_message(message.chat.id, text="Воть..".format(message.from_user), reply_markup=markup)
-		z = message.text
 	
 	elif message.text == "_Хочу мем_" or message.text == "_Ещё!!!_":
 		s = random.randint(0, 100)
@@ -151,7 +119,25 @@ def func(message):
 		markup.add(btn1, btn2)
 		bot.send_message(message.chat.id, text="/", reply_markup=markup)
 		z = message.text
-		
+
+
+@app.route("/", methods=["POST"])
+def webhook():
+	if flask.request.headers.get("content-type") == "application/json":
+		json_string = flask.request.get_data().decode("utf-8")
+		update = telebot.types.Update.de_json(json_string)
+		bot.process_new_updates([update])
+		return ""
+	else:
+		flask.abort(403)
+
+
+if __name__ == "__main__":
+	bot.remove_webhook()
+	time.sleep(1)
+	bot.set_webhook(url=WEB_HOOK_URL)
+	APP_PORT = int(APP_PORT)
+	app.run(host=APP_HOST, port=APP_PORT, debug=True)
 	
 	# elif message.text == "bot_Очистка видео папки_admin":
 	# 	markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
