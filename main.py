@@ -73,41 +73,32 @@ def func(message):
 		z = message.text
 	
 	elif "https://you" in message.text:
-		vid = open("/root/PycharmProjects/YT_Bot/Videos/1.mppeg", "rb")
-		bot.send_video(message.chat.id, vid)
-		vid.close()
-		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
-		btn1 = types.KeyboardButton("_В начало_")
-		btn2 = types.KeyboardButton("_Скачать видео_")
-		markup.add(btn1, btn2)
-		bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
-		                 reply_markup=markup)
-	# x = a[-1] + 1
-	# a.append(x)
-	# x = str(x)
-	# c = str(message)
-	# yt = YouTube(c)  # ссылка на видео.
-	# # yt.stream показывает какое видео ты можешь скачать
-	# # (mp4(720) + audio или только mp4(1080) без звука).
-	# # Сейчас стоит фильтр по mp4.
-	# # print(yt.streams.filter(file_extension='mp4'))
-	# print(yt.title)
-	# stream = yt.streams.get_by_itag(22)  # выбираем по тегу, в каком формате будем скачивать.
-	# stream.download("/root/PycharmProjects/YT_Bot/Videos/", x + ".mp4")  # загружаем видео.
-	# str(yt.title)
-	# bot.send_message(message.chat.id, text=yt.title)
-	# bot.delete_message(message.chat.id, message.message_id)
+	x = a[-1] + 1
+	a.append(x)
+	x = str(x)
+	c = str(message)
+	yt = YouTube(c)  # ссылка на видео.
+	# yt.stream показывает какое видео ты можешь скачать
+	# (mp4(720) + audio или только mp4(1080) без звука).
+	# Сейчас стоит фильтр по mp4.
+	# print(yt.streams.filter(file_extension='mp4'))
+	print(yt.title)
+	stream = yt.streams.get_by_itag(22)  # выбираем по тегу, в каком формате будем скачивать.
+	stream.download("/root/PycharmProjects/YT_Bot/Videos/", x + ".mp4")  # загружаем видео.
+	str(yt.title)
+	bot.send_message(message.chat.id, text=yt.title)
+	bot.delete_message(message.chat.id, message.message_id)
 	
-	# vid = open("/root/PycharmProjects/YT_Bot/Videos/" + x + ".mp4", "rb")
-	# bot.send_video(message.chat.id, vid)
-	# vid.close()
-	# markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
-	# btn1 = types.KeyboardButton("_В начало_")
-	# btn2 = types.KeyboardButton("_Скачать видео_")
-	# markup.add(btn1, btn2)
-	# bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
-	#                  reply_markup=markup)
-	# z = message.text
+	vid = open("/root/PycharmProjects/YT_Bot/Videos/" + x + ".mp4", "rb")
+	bot.send_video(message.chat.id, vid)
+	vid.close()
+	markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
+	btn1 = types.KeyboardButton("_В начало_")
+	btn2 = types.KeyboardButton("_Скачать видео_")
+	markup.add(btn1, btn2)
+	bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
+	                 reply_markup=markup)
+	z = message.text
 	
 	elif message.text == "_В начало_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
