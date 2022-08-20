@@ -87,18 +87,16 @@ def func(message):
 		str(yt.title)
 		bot.send_message(message.chat.id, text=yt.title)
 		bot.delete_message(message.chat.id, message.message_id)
-		
 		vid = open("/root/PycharmProjects/Videos/" + x + ".mp4", "rb")
 		bot.send_video(message.chat.id, vid, message.message_id)
 		vid.close()
-		z = message.text
-		
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
 		btn1 = types.KeyboardButton("_В начало_")
 		btn2 = types.KeyboardButton("_Скачать видео_")
 		markup.add(btn1, btn2)
 		bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
 		                 reply_markup=markup)
+		z = message.text
 		
 	elif message.text == "_В начало_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
