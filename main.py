@@ -83,7 +83,7 @@ def func(message):
         # print(yt.streams.filter(file_extension='mp4'))
         print(yt.title)
         stream = yt.streams.get_by_itag(22)  # выбираем по тегу, в каком формате будем скачивать.
-        stream.download("/root/PycharmProjects/Videos/", x + ".mp4")  # загружаем видео.
+        stream.download("/root/PycharmProjects/YT_Bot/Videos/", x + ".mp4")  # загружаем видео.
         str(yt.title)
         bot.send_message(message.chat.id, text=yt.title)
         bot.delete_message(message.chat.id, message.message_id)
