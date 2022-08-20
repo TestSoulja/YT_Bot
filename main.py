@@ -67,7 +67,7 @@ def func(message):
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
         btn1 = types.KeyboardButton("_В начало_")
         markup.add(btn1)
-        vid = open("/root/PycharmProjects/Videos/" + x + ".mp4", "rb")
+        vid = open("/root/PycharmProjects/Videos/1.mp4")
         bot.send_video(message.chat.id, vid)
         bot.send_message(message.chat.id, text="Пришли ссылку на видео ютуба".format(message.from_user),
                          reply_markup=markup)
