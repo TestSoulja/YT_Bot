@@ -154,3 +154,5 @@ if __name__ == "__main__":
 	# 	z = message.text
 
 bot.polling(none_stop=True, interval=0)
+
+# CXXFLAGS="-stdlib=libc++" CC=/usr/bin/clang CXX=/usr/bin/clang++ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=.. ..
