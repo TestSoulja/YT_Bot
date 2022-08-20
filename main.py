@@ -71,7 +71,7 @@ def func(message):
 		                 reply_markup=markup)
 		z = message.text
 	
-	elif "https" in message.text and z == "_Скачать видео_":
+	elif "https://you" in message.text:
 		x = a[-1] + 1
 		a.append(x)
 		x = str(x)
