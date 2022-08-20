@@ -30,8 +30,7 @@ import yadisk
 API_TOKEN = "5624516487:AAEWFQYLHIkb3lN2sjVzpO3ignrhJVbvUWI"
 
 # Создаем экземпляр бота
-y = yadisk.YaDisk(
-	token="https://oauth.yandex.ru/authorize?response_type=token&client_id=23c2196d1eaf4d43baf4ab22eb1c700c")
+y = yadisk.YaDisk(token="y0_AgAAAAAHTEDxAAhXAgAAAADMuVu-C3oK6uX2Sji3L4Zxa4JxIUv5bC4")
 bot = telebot.TeleBot(API_TOKEN)
 logger = telebot.logger
 a = [0]
@@ -45,7 +44,7 @@ def start(message):
 	markup.add(btn1, btn2)
 	bot.send_message(message.chat.id, text="Привет!!".format(message.from_user), reply_markup=markup)
 	z = message.text
-
+	
 
 @bot.message_handler(content_types=["text"])
 def func(message):
@@ -90,10 +89,21 @@ def func(message):
 		# print(yt.streams.filter(file_extension='mp4'))
 		print(yt.title)
 		stream = yt.streams.get_by_itag(22)  # выбираем по тегу, в каком формате будем скачивать.
-		stream.download("/root/PycharmProjects/YT_Bot/Videos/", x + ".mp4")  # загружаем видео.
+		
+		# Prod
+		# stream.download("/root/PycharmProjects/YT_Bot/Videos/", x + ".mp4")  # загружаем видео.
+		# Stage
+		stream.download("/Users/s.ekker/PycharmProjects/Bot/Videos/", x + ".mp4")  # загружаем видео.
+		
 		str(yt.title)
 		bot.send_message(message.chat.id, text=yt.title)
 		bot.delete_message(message.chat.id, message.message_id)
+		
+		# Prod
+		# y.upload("/root/PycharmProjects/YT_Bot/Videos/" + x + ".mp4", "/Bot/")
+		# Stage
+		y.upload("/Users/s.ekker/PycharmProjects/Bot/Videos/" + x + ".mp4", "/Bot/")
+		
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
 		btn1 = types.KeyboardButton("_В начало_")
 		btn2 = types.KeyboardButton("_Скачать видео_")
