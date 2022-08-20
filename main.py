@@ -88,7 +88,7 @@ def func(message):
         bot.send_message(message.chat.id, text=yt.title)
         bot.delete_message(message.chat.id, message.message_id)
         
-        vid = open("/root/PycharmProjects/Videos/" + x + ".mp4", "rb")
+        vid = open("/root/PycharmProjects/YT_Bot/Videos/" + x + ".mp4", "rb")
         bot.send_video(message.chat.id, vid)
         vid.close()
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
