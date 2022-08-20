@@ -60,7 +60,7 @@ def func(message):
 		btn1 = types.KeyboardButton("_Ещё!!!_")
 		btn2 = types.KeyboardButton("_В начало_")
 		markup.add(btn1, btn2)
-		bot.send_photo(message.chat.id, open("root/PycharmProjects/YT_Bot/AUF/"+ s+"_.jpg", "rb"), reply_markup=markup)
+		bot.send_photo(message.chat.id, open("/PycharmProjects/YT_Bot/AUF/"+ s+"_.jpg", "rb"), reply_markup=markup)
 		z = message.text
 	
 	elif message.text == "_Скачать видео_":
