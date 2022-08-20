@@ -67,6 +67,8 @@ def func(message):
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
         btn1 = types.KeyboardButton("_В начало_")
         markup.add(btn1)
+        vid = open("/root/PycharmProjects/Videos/" + x + ".mp4", "rb")
+        bot.send_video(message.chat.id, vid)
         bot.send_message(message.chat.id, text="Пришли ссылку на видео ютуба".format(message.from_user),
                          reply_markup=markup)
         z = message.text
@@ -88,8 +90,8 @@ def func(message):
         bot.send_message(message.chat.id, text=yt.title)
         bot.delete_message(message.chat.id, message.message_id)
     
-        vid = open("/root/PycharmProjects/Videos/" + x + ".mp4", "rb")
-        bot.send_video(message.chat.id, vid)
+        # vid = open("/root/PycharmProjects/Videos/" + x + ".mp4", "rb")
+        # bot.send_video(message.chat.id, vid)
         
         # vid = open("/root/PycharmProjects/Videos/" + x + ".mp4", "rb")
         # bot.send_video(message.chat.id, vid, message.message_id)
