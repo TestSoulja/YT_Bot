@@ -5,7 +5,6 @@ from pytube import YouTube
 import keyboa
 import requests
 from telebot import types
-import flask
 import time
 import logging
 from random import randint
@@ -17,18 +16,26 @@ from tqdm import tqdm
 from random import randint
 import os.path
 import datetime
+import yadisk
+# prod
+import flask
 
-# Создаем экземпляр бота
 
+app = flask.Flask(__name__)
 API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
 APP_HOST = "127.0.0.1"
 APP_PORT = "8444"
 WEB_HOOK_URL = "https://f074-95-165-162-211.ngrok.io"
+# stage
+# API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
+
+# Создаем экземпляр бота
+y = yadisk.YaDisk(token="https://oauth.yandex.ru/authorize?response_type=token&client_id=23c2196d1eaf4d43baf4ab22eb1c700c")
 bot = telebot.TeleBot(API_TOKEN)
 logger = telebot.logger
-app = flask.Flask(__name__)
-
 a = [0]
+
+
 
 
 @bot.message_handler(commands=["start"])
@@ -72,7 +79,7 @@ def func(message):
                          reply_markup=markup)
         z = message.text
     
-    elif "https://you" in message.text:
+    elif "https://you" in message.text and z == "_Скачать видео_":
         x = a[-1] + 1
         a.append(x)
         x = str(x)
@@ -93,6 +100,7 @@ def func(message):
         btn2 = types.KeyboardButton("_Скачать видео_")
         markup.add(btn1, btn2)
         bot.send_message(message.chat.id, text="Here you are".format(message.from_user), reply_markup=markup)
+        z = "_Скачать видео_"
         
         # vid = open("/root/PycharmProjects/YT_Bot/Videos/" + x + ".mp4", "rb")
         # bot.send_video(message.chat.id, vid)
@@ -146,16 +154,5 @@ if __name__ == "__main__":
     APP_PORT = int(APP_PORT)
     app.run(host=APP_HOST, port=APP_PORT, debug=True)
     
-    # elif message.text == "bot_Очистка видео папки_admin":
-    # 	markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
-    # 	btn1 = types.KeyboardButton("bot_Очистка видео папки_admin")
-    # 	btn2 = types.KeyboardButton("bot_Выключить_admin")
-    # 	markup.add(btn1, btn2)
-    # 	bot.send_message(message.chat.id, text="Папка почищена, удалено n", reply_markup=markup)
-    # 	z = message.text
-    # elif message.text == "bot_Выключить_admin":
-    # 	markup = types.ReplyKeyboardRemove(selective=False)
-    # 	bot.send_message(message.chat.id, text="Пока всем(", reply_markup=markup)
-    # 	z = message.text
 
 bot.polling(none_stop=True, interval=0)
