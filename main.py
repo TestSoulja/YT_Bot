@@ -73,7 +73,7 @@ def func(message):
 		z = message.text
 	
 	elif "https://you" in message.text:
-		vid = open("/root/PycharmProjects/YT_Bot/Videos/1.mp4", "rb")
+		vid = open("/root/PycharmProjects/YT_Bot/Videos/1.mppeg", "rb")
 		bot.send_video(message.chat.id, vid)
 		vid.close()
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
