@@ -31,8 +31,7 @@ WEB_HOOK_URL = "https://f074-95-165-162-211.ngrok.io"
 # API_TOKEN = "5624516487:AAEWFQYLHIkb3lN2sjVzpO3ignrhJVbvUWI"
 
 # Создаем экземпляр бота
-y = yadisk.YaDisk(
-	token="https://oauth.yandex.ru/authorize?response_type=token&client_id=23c2196d1eaf4d43baf4ab22eb1c700c")
+y = yadisk.YaDisk(token="y0_AgAAAAAHTEDxAAhXAgAAAADMuVu-C3oK6uX2Sji3L4Zxa4JxIUv5bC4")
 bot = telebot.TeleBot(API_TOKEN)
 logger = telebot.logger
 a = [0]
@@ -53,10 +52,10 @@ def func(message):
 	z = message.text
 	if message.text == "_Что я могу?_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
-		btn1 = types.KeyboardButton("_Скачать видео_")
+		# btn1 = types.KeyboardButton("_Скачать видео_")
 		btn2 = types.KeyboardButton("_Хочу мем_")
 		btn3 = types.KeyboardButton("_В начало_")
-		markup.add(btn1, btn2, btn3)
+		markup.add(btn2, btn3)
 		bot.send_message(message.chat.id, text="Воть..".format(message.from_user), reply_markup=markup)
 		z = message.text
 	
@@ -79,7 +78,7 @@ def func(message):
 		                 reply_markup=markup)
 		z = message.text
 	
-	elif "https://you" in message.text and z == "_Скачать видео_":
+	elif "https://you" in message.text:
 		x = a[-1] + 1
 		a.append(x)
 		x = str(x)
@@ -91,10 +90,21 @@ def func(message):
 		# print(yt.streams.filter(file_extension='mp4'))
 		print(yt.title)
 		stream = yt.streams.get_by_itag(22)  # выбираем по тегу, в каком формате будем скачивать.
-		stream.download("/root/PycharmProjects/YT_Bot/Videos/", x + ".mp4")  # загружаем видео.
+		
+		# Prod
+		# stream.download("/root/PycharmProjects/YT_Bot/Videos/", x + ".mp4")  # загружаем видео.
+		# Stage
+		stream.download("/Users/s.ekker/PycharmProjects/Bot/Videos/", x + ".mp4")  # загружаем видео.
+		
 		str(yt.title)
 		bot.send_message(message.chat.id, text=yt.title)
 		bot.delete_message(message.chat.id, message.message_id)
+		
+		# Prod
+		# y.upload("/root/PycharmProjects/YT_Bot/Videos/" + x + ".mp4", "/Bot/")
+		# Stage
+		y.upload("/Users/s.ekker/PycharmProjects/Bot/Videos/" + x + ".mp4", "/Bot/" + x + ".mp4")
+		
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
 		btn1 = types.KeyboardButton("_В начало_")
 		btn2 = types.KeyboardButton("_Скачать видео_")
@@ -136,22 +146,22 @@ def func(message):
 		z = message.text
 
 
-@app.route("/", methods=["POST"])
-def webhook():
-	if flask.request.headers.get("content-type") == "application/json":
-		json_string = flask.request.get_data().decode("utf-8")
-		update = telebot.types.Update.de_json(json_string)
-		bot.process_new_updates([update])
-		return ""
-	else:
-		flask.abort(403)
-
-
-if __name__ == "__main__":
-	bot.remove_webhook()
-	time.sleep(1)
-	bot.set_webhook(url=WEB_HOOK_URL)
-	APP_PORT = int(APP_PORT)
-	app.run(host=APP_HOST, port=APP_PORT, debug=True)
+# @app.route("/", methods=["POST"])
+# def webhook():
+# 	if flask.request.headers.get("content-type") == "application/json":
+# 		json_string = flask.request.get_data().decode("utf-8")
+# 		update = telebot.types.Update.de_json(json_string)
+# 		bot.process_new_updates([update])
+# 		return ""
+# 	else:
+# 		flask.abort(403)
+#
+#
+# if __name__ == "__main__":
+# 	bot.remove_webhook()
+# 	time.sleep(1)
+# 	bot.set_webhook(url=WEB_HOOK_URL)
+# 	APP_PORT = int(APP_PORT)
+# 	app.run(host=APP_HOST, port=APP_PORT, debug=True)
 
 bot.polling(none_stop=True, interval=0)

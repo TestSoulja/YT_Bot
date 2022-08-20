@@ -51,10 +51,10 @@ def func(message):
 	z = message.text
 	if message.text == "_Что я могу?_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
-		btn1 = types.KeyboardButton("_Скачать видео_")
+		# btn1 = types.KeyboardButton("_Скачать видео_")
 		btn2 = types.KeyboardButton("_Хочу мем_")
 		btn3 = types.KeyboardButton("_В начало_")
-		markup.add(btn1, btn2, btn3)
+		markup.add(btn2, btn3)
 		bot.send_message(message.chat.id, text="Воть..".format(message.from_user), reply_markup=markup)
 		z = message.text
 	
@@ -77,7 +77,7 @@ def func(message):
 		                 reply_markup=markup)
 		z = message.text
 	
-	elif "https://you" in message.text and z == "_Скачать видео_":
+	elif "https://you" in message.text:
 		x = a[-1] + 1
 		a.append(x)
 		x = str(x)
@@ -102,7 +102,7 @@ def func(message):
 		# Prod
 		# y.upload("/root/PycharmProjects/YT_Bot/Videos/" + x + ".mp4", "/Bot/")
 		# Stage
-		y.upload("/Users/s.ekker/PycharmProjects/Bot/Videos/" + x + ".mp4", "/Bot/")
+		y.upload("/Users/s.ekker/PycharmProjects/Bot/Videos/" + x + ".mp4", "/Bot/" + x + ".mp4")
 		
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True, one_time_keyboard=False)
 		btn1 = types.KeyboardButton("_В начало_")
