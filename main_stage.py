@@ -18,15 +18,16 @@ import os.path
 import datetime
 import yadisk
 # prod
-import flask
-
-app = flask.Flask(__name__)
-API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
-APP_HOST = "127.0.0.1"
-APP_PORT = "8444"
-WEB_HOOK_URL = "https://f074-95-165-162-211.ngrok.io"
-# stage
+# import flask
+#
+# app = flask.Flask(__name__)
 # API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
+# APP_HOST = "127.0.0.1"
+# APP_PORT = "8444"
+# WEB_HOOK_URL = "https://f074-95-165-162-211.ngrok.io"
+
+# stage
+API_TOKEN = "5624516487:AAEWFQYLHIkb3lN2sjVzpO3ignrhJVbvUWI"
 
 # Создаем экземпляр бота
 y = yadisk.YaDisk(
@@ -134,22 +135,6 @@ def func(message):
 		z = message.text
 
 
-@app.route("/", methods=["POST"])
-def webhook():
-	if flask.request.headers.get("content-type") == "application/json":
-		json_string = flask.request.get_data().decode("utf-8")
-		update = telebot.types.Update.de_json(json_string)
-		bot.process_new_updates([update])
-		return ""
-	else:
-		flask.abort(403)
-
-
-if __name__ == "__main__":
-	bot.remove_webhook()
-	time.sleep(1)
-	bot.set_webhook(url=WEB_HOOK_URL)
-	APP_PORT = int(APP_PORT)
-	app.run(host=APP_HOST, port=APP_PORT, debug=True)
+# @app.route("/", methods=["POST"])port=APP_PORT, debug=True)
 
 bot.polling(none_stop=True, interval=0)
