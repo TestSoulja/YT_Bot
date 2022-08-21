@@ -28,7 +28,7 @@ import requests
 # API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
 # APP_HOST = "127.0.0.1"
 # APP_PORT = "8444"
-# WEB_HOOK_URL = "https://68de-95-165-162-211.ngrok.io"
+# WEB_HOOK_URL = "https://56c5-95-165-162-211.ngrok.io"
 
 # stage
 API_TOKEN = "5624516487:AAEWFQYLHIkb3lN2sjVzpO3ignrhJVbvUWI"
@@ -72,7 +72,7 @@ def func(message):
 		# bot.send_photo(message.chat.id, open("/root/PycharmProjects/YT_Bot/AUF/Wolf/" + s + "_.jpg", "rb"), reply_to_message_id=message.message_id,
 		#                reply_markup=markup)
 		# Stage
-		bot.send_photo(message.chat.id, open("/Users/s.ekker/PycharmProjects/Bot/AUF/Wolf/" + s + "_.jpg", "rb"),
+		bot.send_photo(message.chat.id, open("/Users/s.ekker/PycharmProjects/YT_Bot/AUF/Wolf/" + s + "_.jpg", "rb"),
 		               reply_to_message_id=message.message_id,
 		               reply_markup=markup)
 	
