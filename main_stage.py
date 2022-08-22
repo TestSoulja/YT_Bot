@@ -47,7 +47,6 @@ def start(message):
 	btn2 = types.KeyboardButton("_Выключить_")
 	markup.add(btn1, btn2)
 	bot.send_message(message.chat.id, text="Привет!!", reply_to_message_id=message.message_id, reply_markup=markup)
-	z = message.text
 
 
 @bot.message_handler(content_types=["text"])
@@ -72,7 +71,8 @@ def func(message):
 		# Prod
 		# bot.send_photo(message.chat.id, open("/root/PycharmProjects/YT_Bot/AUF/Wolf/" + s + "_.jpg", "rb"), reply_to_message_id=message.message_id, reply_markup=markup)
 		# Stage
-		bot.send_photo(message.chat.id, open("/Users/s.ekker/PycharmProjects/YT_Bot/AUF/Wolf/" + s + "_.jpg", "rb"), reply_to_message_id=message.message_id, reply_markup=markup)
+		bot.send_photo(message.chat.id, open("/Users/s.ekker/PycharmProjects/YT_Bot/AUF/Wolf/" + s + "_.jpg", "rb"),
+		               reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
 	
 	elif message.text == "_Скачать видео_":
@@ -81,71 +81,64 @@ def func(message):
 		btn2 = types.KeyboardButton("_Сережа_")
 		btnext = types.KeyboardButton("_В начало_")
 		markup.add(btn1, btn2, btnext)
-		bot.send_message(message.chat.id, text="Хто я?".format(message.from_user), reply_to_message_id=message.message_id, reply_markup=markup)
+		bot.send_message(message.chat.id, text="Хто я?".format(message.from_user),
+		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
 	
 	elif message.text == "_Андрей_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
 		btn1 = types.KeyboardButton("_В начало_")
 		markup.add(btn1)
-		bot.send_message(message.chat.id, text="Пришли ссылку на видос ютуб".format(message.from_user), reply_to_message_id=message.message_id, reply_markup=markup)
+		bot.send_message(message.chat.id, text="Пришли ссылку на видос ютуб".format(message.from_user),
+		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 2
 	
 	elif message.text == "_Сережа_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
 		btn1 = types.KeyboardButton("_В начало_")
 		markup.add(btn1)
-		bot.send_message(message.chat.id, text="Пришли ссылку на видос ютуб".format(message.from_user), reply_to_message_id=message.message_id, reply_markup=markup)
+		bot.send_message(message.chat.id, text="Пришли ссылку на видос ютуб".format(message.from_user),
+		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 1
 	
 	elif "https://you" in message.text and z == 1:
-		x = a[-1] + 1
-		a.append(x)
-		x = str(x)
 		c = str(message)
 		yt = YouTube(c)  # ссылка на видео.
 		print(yt.title)
-		stream = yt.streams.get_by_itag(22)  # выбираем по тегу, в каком формате будем скачивать.
 		str(yt.title)
 		yt.title = yt.title.translate({ord(i): None for i in "/|#$'"})
-		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
 		
 		# Prod
-		# stream.download("/root/PycharmProjects/Bot/Sergey/", yt.title + ".mp4")  # загружаем видео.
+		# yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Sergey/", yt.title + ".mp4")
 		# Stage
-		stream.download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")  # загружаем видео.
-		
-		bot.send_message(message.chat.id, text=yt.title)
-		bot.send_message(message.chat.id, text="To Pc OK".format(message.from_user), reply_to_message_id=message.message_id, reply_markup=markup)
+		yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
+
+		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
 		btn1 = types.KeyboardButton("_Скачать видео_")
 		btn2 = types.KeyboardButton("_В начало_")
 		markup.add(btn1, btn2)
-		bot.send_message(message.chat.id, text="Here you are".format(message.from_user), reply_to_message_id=message.message_id, reply_markup=markup)
+		bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
+		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
 	
 	elif "https://you" in message.text and z == 2:
-		x = a[-1] + 1
-		a.append(x)
-		x = str(x)
 		c = str(message)
 		yt = YouTube(c)  # ссылка на видео.
 		print(yt.title)
-		stream = yt.streams.get_by_itag(22)  # выбираем по тегу, в каком формате будем скачивать.
 		str(yt.title)
 		yt.title = yt.title.translate({ord(i): None for i in "/|#$'"})
-		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
 		
 		# Prod
-		# stream.download("/root/PycharmProjects/Bot/Andrey/", yt.title + ".mp4")  # загружаем видео.
+		# yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Andrey/", yt.title + ".mp4")
 		# Stage
-		stream.download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")  # загружаем видео.
+		yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
 		
-		bot.send_message(message.chat.id, text=yt.title)
-		bot.send_message(message.chat.id, text="To Pc OK".format(message.from_user), reply_to_message_id=message.message_id, reply_markup=markup)
-		btn1 = types.KeyboardButton("_В начало_")
-		btn2 = types.KeyboardButton("_Скачать видео_")
+		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
+		btn1 = types.KeyboardButton("_Скачать видео_")
+		btn2 = types.KeyboardButton("_В начало_")
 		markup.add(btn1, btn2)
-		bot.send_message(message.chat.id, text="Here you are".format(message.from_user), reply_to_message_id=message.message_id, reply_markup=markup)
+		bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
+		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
 	
 	elif message.text == "_В начало_":
@@ -153,7 +146,8 @@ def func(message):
 		btn1 = types.KeyboardButton("_Что я могу?_")
 		btn2 = types.KeyboardButton("_Выключить_")
 		markup.add(btn1, btn2)
-		bot.send_message(message.chat.id, text="Привет!! Вы снова со мной :3".format(message.from_user), reply_to_message_id=message.message_id, reply_markup=markup)
+		bot.send_message(message.chat.id, text="Привет!! Вы снова со мной :3".format(message.from_user),
+		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
 	
 	elif message.text == "_Выключить_" or message.text == "bot_Выключить_admin":
@@ -251,3 +245,44 @@ bot.polling(none_stop=True, interval=0)
 # y.upload("/Users/s.ekker/PycharmProjects/Bot/Videos/" + yt.title + ".mp4", "/Bot/" + yt.title + ".mp4")
 # bot.send_message(message.chat.id, text="To Disk OK".format(message.from_user),
 #                  reply_to_message_id=message.message_id, reply_markup=markup)
+#
+#
+# Dovnl
+# # Prod
+# # stream.download("/root/PycharmProjects/Bot/Sergey/", yt.title + ".mp4")  # загружаем видео.
+# # Stage
+# yt.download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
+# # stream = yt.streams.get_by_itag(18)  # выбираем по тегу, в каком формате будем скачивать.
+# str(yt.title)
+# yt.title = yt.title.translate({ord(i): None for i in "/|#$'"})
+# # Prod
+# # stream.download("/root/PycharmProjects/Bot/Sergey/", yt.title + ".mp4")  # загружаем видео.
+# # Stage
+# yt.download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
+
+# elif "https://you" in message.text and z == 2:
+# x = a[-1] + 1
+# a.append(x)
+# x = str(x)
+# c = str(message)
+# yt = YouTube(c)  # ссылка на видео.
+# print(yt.title)
+# stream = yt.streams.get_by_itag(22)  # выбираем по тегу, в каком формате будем скачивать.
+# str(yt.title)
+# yt.title = yt.title.translate({ord(i): None for i in "/|#$'"})
+# markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
+#
+# # Prod
+# # stream.download("/root/PycharmProjects/Bot/Andrey/", yt.title + ".mp4")  # загружаем видео.
+# # Stage
+# stream.download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")  # загружаем видео.
+#
+# bot.send_message(message.chat.id, text=yt.title)
+# bot.send_message(message.chat.id, text="To Pc OK".format(message.from_user),
+#                  reply_to_message_id=message.message_id, reply_markup=markup)
+# btn1 = types.KeyboardButton("_В начало_")
+# btn2 = types.KeyboardButton("_Скачать видео_")
+# markup.add(btn1, btn2)
+# bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
+#                  reply_to_message_id=message.message_id, reply_markup=markup)
+# z = 0
