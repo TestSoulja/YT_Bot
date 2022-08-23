@@ -53,15 +53,22 @@ def func(message):
 	global server
 	
 	def logs():
-		with open('/Users/s.ekker/PycharmProjects/YT_Bot/TestBot.json', 'r') as f:
-			data = json.load(f)
-		data.append(
-			{"date": dtn.strftime('%d-%m-%Y %H:%M'), "user": message.from_user.first_name, "uid": message.from_user.id,
-			 "message": message.text})
 		if server == "Stage":
+			with open('/Users/s.ekker/PycharmProjects/TestBot.json', 'r') as f:
+				data = json.load(f)
+			data.append(
+				{"date": dtn.strftime('%d-%m-%Y %H:%M'), "user": message.from_user.first_name,
+				 "uid": message.from_user.id,
+				 "message": message.text})
 			with open('/Users/s.ekker/PycharmProjects/TestBot.json', "w") as f:
 				json.dump(data, f)
 		else:
+			with open('/root/PycharmProjects/Bot/TestBot.json', 'r') as f:
+				data = json.load(f)
+			data.append(
+				{"date": dtn.strftime('%d-%m-%Y %H:%M'), "user": message.from_user.first_name,
+				 "uid": message.from_user.id,
+				 "message": message.text})
 			with open('/root/PycharmProjects/Bot/TestBot.json', "w") as f:
 				json.dump(data, f)
 			
