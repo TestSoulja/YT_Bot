@@ -62,7 +62,7 @@ def func(message):
 			with open('/Users/s.ekker/PycharmProjects/TestBot.json', "w") as f:
 				json.dump(data, f)
 		else:
-			with open('/root/PycharmProjects/YT_Bot/TestBot.json', "w") as f:
+			with open('/root/PycharmProjects/Bot/TestBot.json', "w") as f:
 				json.dump(data, f)
 			
 	if message.text == "_Что я могу?_":
