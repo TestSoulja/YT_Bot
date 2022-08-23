@@ -30,18 +30,6 @@ else:
 	APP_PORT = "8444"
 	WEB_HOOK_URL = "https://56c5-95-165-162-211.ngrok.io"
 
-# prod
-# import flask
-#
-# app = flask.Flask(__name__)
-# API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
-# APP_HOST = "127.0.0.1"
-# APP_PORT = "8444"
-# WEB_HOOK_URL = "https://56c5-95-165-162-211.ngrok.io"
-
-# stage
-# API_TOKEN = "5624516487:AAEWFQYLHIkb3lN2sjVzpO3ignrhJVbvUWI"
-
 # Создаем экземпляр бота
 y = yadisk.YaDisk(token="y0_AgAAAAAHTEDxAAhXAgAAAADMuVu-C3oK6uX2Sji3L4Zxa4JxIUv5bC4")
 bot = telebot.TeleBot(API_TOKEN)
@@ -223,9 +211,9 @@ def func(message):
 # 	APP_PORT = int(APP_PORT)
 # 	app.run(host=APP_HOST, port=APP_PORT, debug=True)
 
-bot.polling(none_stop=True, interval=0)
-
 # bot.delete_message(message.chat.id, message.message_id)
+
+bot.polling(none_stop=True, interval=0)
 
 # Archive
 
@@ -326,3 +314,15 @@ bot.polling(none_stop=True, interval=0)
 # bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
 #                  reply_to_message_id=message.message_id, reply_markup=markup)
 # z = 0
+
+# prod
+# import flask
+#
+# app = flask.Flask(__name__)
+# API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
+# APP_HOST = "127.0.0.1"
+# APP_PORT = "8444"
+# WEB_HOOK_URL = "https://56c5-95-165-162-211.ngrok.io"
+
+# stage
+# API_TOKEN = "5624516487:AAEWFQYLHIkb3lN2sjVzpO3ignrhJVbvUWI"
