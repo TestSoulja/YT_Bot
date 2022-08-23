@@ -57,7 +57,7 @@ def func(message):
 			with open('/Users/s.ekker/PycharmProjects/TestBot.json', 'r') as f:
 				data = json.load(f)
 			data.append(
-				{"date": dtn.strftime('%d-%m-%Y %H:%M'), "user": message.from_user.first_name,
+				{"date": dtn.strftime('%d-%m-%Y %H:%M'),"chat": message.chat.id, "user": message.from_user.first_name,
 				 "uid": message.from_user.id,
 				 "message": message.text})
 			with open('/Users/s.ekker/PycharmProjects/TestBot.json', "w") as f:
@@ -66,7 +66,7 @@ def func(message):
 			with open('/root/PycharmProjects/Bot/TestBot.json', 'r') as f:
 				data = json.load(f)
 			data.append(
-				{"date": dtn.strftime('%d-%m-%Y %H:%M'), "user": message.from_user.first_name,
+				{"date": dtn.strftime('%d-%m-%Y %H:%M'),"chat": message.chat.id, "user": message.from_user.first_name,
 				 "uid": message.from_user.id,
 				 "message": message.text})
 			with open('/root/PycharmProjects/Bot/TestBot.json', "w") as f:
