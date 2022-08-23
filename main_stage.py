@@ -3,6 +3,8 @@ import telebot
 from pytube import YouTube
 from telebot import types
 import yadisk
+import datetime
+import json
 import pytube
 import keyboa
 import requests
@@ -12,14 +14,21 @@ import logging
 from random import randint
 import os
 import os.path
-import datetime
-import time
 from tqdm import tqdm
 from random import randint
-import os.path
-import datetime
-import json
-import requests
+
+server = "Stage"
+
+if server == "Stage":
+	API_TOKEN = "5624516487:AAEWFQYLHIkb3lN2sjVzpO3ignrhJVbvUWI"
+else:
+	import flask
+	
+	app = flask.Flask(__name__)
+	API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
+	APP_HOST = "127.0.0.1"
+	APP_PORT = "8444"
+	WEB_HOOK_URL = "https://56c5-95-165-162-211.ngrok.io"
 
 # prod
 # import flask
@@ -31,7 +40,7 @@ import requests
 # WEB_HOOK_URL = "https://56c5-95-165-162-211.ngrok.io"
 
 # stage
-API_TOKEN = "5624516487:AAEWFQYLHIkb3lN2sjVzpO3ignrhJVbvUWI"
+# API_TOKEN = "5624516487:AAEWFQYLHIkb3lN2sjVzpO3ignrhJVbvUWI"
 
 # Создаем экземпляр бота
 y = yadisk.YaDisk(token="y0_AgAAAAAHTEDxAAhXAgAAAADMuVu-C3oK6uX2Sji3L4Zxa4JxIUv5bC4")
@@ -51,7 +60,23 @@ def start(message):
 
 @bot.message_handler(content_types=["text"])
 def func(message):
+	dtn = datetime.datetime.now()
 	global z
+	global server
+	
+	def logs():
+		with open('/Users/s.ekker/PycharmProjects/YT_Bot/TestBot.json', 'r') as f:
+			data = json.load(f)
+		data.append(
+			{"date": dtn.strftime('%d-%m-%Y %H:%M'), "user": message.from_user.first_name, "uid": message.from_user.id,
+			 "message": message.text})
+		if server == "Stage":
+			with open('/Users/s.ekker/PycharmProjects/TestBot.json', "w") as f:
+				json.dump(data, f)
+		else:
+			with open('/root/PycharmProjects/YT_Bot/TestBot.json', "w") as f:
+				json.dump(data, f)
+			
 	if message.text == "_Что я могу?_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
 		btn1 = types.KeyboardButton("_Скачать видео_")
@@ -60,6 +85,7 @@ def func(message):
 		markup.add(btn1, btn2, btn3)
 		bot.send_message(message.chat.id, text="Воть..", reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
+		logs()
 	
 	elif message.text == "_Хочу мем_" or message.text == "_Ещё!!!_":
 		s = random.randint(0, 100)
@@ -68,12 +94,15 @@ def func(message):
 		btn1 = types.KeyboardButton("_Ещё!!!_")
 		btn2 = types.KeyboardButton("_В начало_")
 		markup.add(btn1, btn2)
-		# Prod
-		# bot.send_photo(message.chat.id, open("/root/PycharmProjects/YT_Bot/AUF/Wolf/" + s + "_.jpg", "rb"), reply_to_message_id=message.message_id, reply_markup=markup)
-		# Stage
-		bot.send_photo(message.chat.id, open("/Users/s.ekker/PycharmProjects/YT_Bot/AUF/Wolf/" + s + "_.jpg", "rb"),
-		               reply_to_message_id=message.message_id, reply_markup=markup)
+		if server == "Stage":
+			bot.send_photo(message.chat.id, open("/Users/s.ekker/PycharmProjects/YT_Bot/AUF/Wolf/" + s + "_.jpg", "rb"),
+			               reply_to_message_id=message.message_id, reply_markup=markup)
+		else:
+			bot.send_photo(message.chat.id, open("/root/PycharmProjects/YT_Bot/AUF/Wolf/" + s + "_.jpg", "rb"),
+			               reply_to_message_id=message.message_id, reply_markup=markup)
+			
 		z = 0
+		logs()
 	
 	elif message.text == "_Скачать видео_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
@@ -84,6 +113,7 @@ def func(message):
 		bot.send_message(message.chat.id, text="Хто я?".format(message.from_user),
 		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
+		logs()
 	
 	elif message.text == "_Андрей_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
@@ -92,6 +122,7 @@ def func(message):
 		bot.send_message(message.chat.id, text="Пришли ссылку на видос ютуб".format(message.from_user),
 		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 2
+		logs()
 	
 	elif message.text == "_Сережа_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
@@ -100,6 +131,7 @@ def func(message):
 		bot.send_message(message.chat.id, text="Пришли ссылку на видос ютуб".format(message.from_user),
 		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 1
+		logs()
 	
 	elif "https://you" in message.text and z == 1:
 		c = str(message)
@@ -108,10 +140,10 @@ def func(message):
 		str(yt.title)
 		yt.title = yt.title.translate({ord(i): None for i in "/|#$'"})
 		
-		# Prod
-		# yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Sergey/", yt.title + ".mp4")
-		# Stage
-		yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
+		if server == "Stage":
+			yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
+		else:
+			yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Sergey/", yt.title + ".mp4")
 
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
 		btn1 = types.KeyboardButton("_Скачать видео_")
@@ -120,6 +152,7 @@ def func(message):
 		bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
 		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
+		logs()
 	
 	elif "https://you" in message.text and z == 2:
 		c = str(message)
@@ -128,10 +161,10 @@ def func(message):
 		str(yt.title)
 		yt.title = yt.title.translate({ord(i): None for i in "/|#$'"})
 		
-		# Prod
-		# yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Andrey/", yt.title + ".mp4")
-		# Stage
-		yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
+		if server == "Stage":
+			yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
+		else:
+			yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Andrey/", yt.title + ".mp4")
 		
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
 		btn1 = types.KeyboardButton("_Скачать видео_")
@@ -140,6 +173,7 @@ def func(message):
 		bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
 		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
+		logs()
 	
 	elif message.text == "_В начало_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
@@ -149,11 +183,13 @@ def func(message):
 		bot.send_message(message.chat.id, text="Привет!! Вы снова со мной :3".format(message.from_user),
 		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
-	
+		logs()
+
 	elif message.text == "_Выключить_" or message.text == "bot_Выключить_admin":
 		markup = types.ReplyKeyboardRemove(selective=True)
 		bot.send_message(message.chat.id, text="Пока(", reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
+		logs()
 	
 	elif message.text == "bot_admin_console":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
@@ -162,9 +198,11 @@ def func(message):
 		markup.add(btn1, btn2)
 		bot.send_message(message.chat.id, text="/", reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
+		logs()
 	
 	else:
 		z = 0
+		logs()
 
 
 # @app.route("/", methods=["POST"])
@@ -187,6 +225,7 @@ def func(message):
 
 bot.polling(none_stop=True, interval=0)
 
+# bot.delete_message(message.chat.id, message.message_id)
 
 # Archive
 
