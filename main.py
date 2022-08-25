@@ -57,7 +57,7 @@ def func(message):
 			with open('/Users/s.ekker/PycharmProjects/TestBot.json', 'r') as f:
 				data = json.load(f)
 			data.append(
-				{"date": dtn.strftime('%d-%m-%Y %H:%M'),"chat": message.chat.id, "user": message.from_user.first_name,
+				{"date": dtn.strftime('%d-%m-%Y %H:%M'), "chat": message.chat.id, "user": message.from_user.first_name,
 				 "uid": message.from_user.id,
 				 "message": message.text})
 			with open('/Users/s.ekker/PycharmProjects/TestBot.json', "w") as f:
@@ -66,7 +66,7 @@ def func(message):
 			with open('/root/PycharmProjects/Bot/TestBot.json', 'r') as f:
 				data = json.load(f)
 			data.append(
-				{"date": dtn.strftime('%d-%m-%Y %H:%M'),"chat": message.chat.id, "user": message.from_user.first_name,
+				{"date": dtn.strftime('%d-%m-%Y %H:%M'), "chat": message.chat.id, "user": message.from_user.first_name,
 				 "uid": message.from_user.id,
 				 "message": message.text})
 			with open('/root/PycharmProjects/Bot/TestBot.json', "w") as f:
@@ -133,10 +133,12 @@ def func(message):
 		yt = YouTube(c)  # ссылка на видео.
 		print(yt.title)
 		str(yt.title)
-		yt.title = yt.title.translate({ord(i): None for i in "/|#$'"})
+		yt.title = yt.title.translate({ord(i): None for i in "|!-.#$;:'/,"})
 		
 		if server == "Stage":
-			yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
+			yt.streams.get_highest_resolution().download(
+				"/Users/s.ekker/PycharmProjects/Yandex.Disk.localized/Bot/Sergey/", yt.title + ".mp4")
+		# yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
 		else:
 			yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Sergey/", yt.title + ".mp4")
 		
