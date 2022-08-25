@@ -17,7 +17,9 @@ import os.path
 from tqdm import tqdm
 from random import randint
 
+
 server = "Stage"
+
 
 if server == "Stage":
 	API_TOKEN = "5624516487:AAEWFQYLHIkb3lN2sjVzpO3ignrhJVbvUWI"
@@ -57,7 +59,7 @@ def func(message):
 			with open('/Users/s.ekker/PycharmProjects/TestBot.json', 'r') as f:
 				data = json.load(f)
 			data.append(
-				{"date": dtn.strftime('%d-%m-%Y %H:%M'),"chat": message.chat.id, "user": message.from_user.first_name,
+				{"date": dtn.strftime('%d-%m-%Y %H:%M'), "chat": message.chat.id, "user": message.from_user.first_name,
 				 "uid": message.from_user.id,
 				 "message": message.text})
 			with open('/Users/s.ekker/PycharmProjects/TestBot.json', "w") as f:
@@ -66,12 +68,12 @@ def func(message):
 			with open('/root/PycharmProjects/Bot/TestBot.json', 'r') as f:
 				data = json.load(f)
 			data.append(
-				{"date": dtn.strftime('%d-%m-%Y %H:%M'),"chat": message.chat.id, "user": message.from_user.first_name,
+				{"date": dtn.strftime('%d-%m-%Y %H:%M'), "chat": message.chat.id, "user": message.from_user.first_name,
 				 "uid": message.from_user.id,
 				 "message": message.text})
 			with open('/root/PycharmProjects/Bot/TestBot.json', "w") as f:
 				json.dump(data, f)
-			
+	
 	if message.text == "_Что я могу?_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
 		btn1 = types.KeyboardButton("_Скачать видео_")
@@ -95,7 +97,7 @@ def func(message):
 		else:
 			bot.send_photo(message.chat.id, open("/root/PycharmProjects/YT_Bot/AUF/Wolf/" + s + "_.jpg", "rb"),
 			               reply_to_message_id=message.message_id, reply_markup=markup)
-			
+		
 		z = 0
 		logs()
 	
@@ -133,13 +135,14 @@ def func(message):
 		yt = YouTube(c)  # ссылка на видео.
 		print(yt.title)
 		str(yt.title)
-		yt.title = yt.title.translate({ord(i): None for i in "/|#$'"})
+		yt.title = yt.title.translate({ord(i): None for i in "|!-.#$;:'/,"})
 		
 		if server == "Stage":
-			yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
+			yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/Yandex.Disk.localized/Bot/Sergey/", yt.title + ".mp4")
+			# yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
 		else:
 			yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Sergey/", yt.title + ".mp4")
-
+		
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
 		btn1 = types.KeyboardButton("_Скачать видео_")
 		btn2 = types.KeyboardButton("_В начало_")
@@ -179,7 +182,7 @@ def func(message):
 		                 reply_to_message_id=message.message_id, reply_markup=markup)
 		z = 0
 		logs()
-
+	
 	elif message.text == "_Выключить_" or message.text == "bot_Выключить_admin":
 		markup = types.ReplyKeyboardRemove(selective=True)
 		bot.send_message(message.chat.id, text="Пока(", reply_to_message_id=message.message_id, reply_markup=markup)

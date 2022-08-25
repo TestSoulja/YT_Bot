@@ -1,3 +1,6 @@
-s = "Fire Again ft. Ashnikko // Official Music Video // VALORANT Champions 2022"
-s = s.replace("/", "")
-print(s)
+import speech_recognition as speech_recog
+
+sample_audio = speech_recog.AudioFile('/Users/s.ekker/PycharmProjects/')
+
+with sample_audio as audio_file:
+    audio_content = recog.record(audio_file)
