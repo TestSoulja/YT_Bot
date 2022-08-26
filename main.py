@@ -128,49 +128,46 @@ def func(message):
 		z = 1
 		logs()
 	
-	elif "https://you" in message.text and z == 1:
+	elif "https://you" in message.text:
 		c = str(message)
 		yt = YouTube(c)  # ссылка на видео.
-		print(yt.title)
 		str(yt.title)
-		yt.title = yt.title.translate({ord(i): None for i in "|!-.#$;:'/,"})
+		yt.title = yt.title.translate({ord(i): None for i in "|/!-.#$;:',"})
+		# print(yt.title)
+		# print(yt.streams)
 		
-		if server == "Stage":
-			yt.streams.get_highest_resolution().download(
-				"/Users/s.ekker/PycharmProjects/Yandex.Disk.localized/Bot/Sergey/", yt.title + ".mp4")
-		# yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
-		else:
-			yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Sergey/", yt.title + ".mp4")
+		if z == 1:
+			if server == "Stage":
+				# yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/Yandex.Disk.localized/Bot/Sergey/", yt.title + ".mp4")
+				yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/",
+				                                             yt.title + ".mp4")
+			else:
+				yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Sergey/", yt.title + ".mp4")
+			
+			markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
+			btn1 = types.KeyboardButton("_Скачать видео_")
+			btn2 = types.KeyboardButton("_В начало_")
+			markup.add(btn1, btn2)
+			bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
+			                 reply_to_message_id=message.message_id, reply_markup=markup)
+			z = 0
+			logs()
 		
-		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
-		btn1 = types.KeyboardButton("_Скачать видео_")
-		btn2 = types.KeyboardButton("_В начало_")
-		markup.add(btn1, btn2)
-		bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
-		                 reply_to_message_id=message.message_id, reply_markup=markup)
-		z = 0
-		logs()
-	
-	elif "https://you" in message.text and z == 2:
-		c = str(message)
-		yt = YouTube(c)  # ссылка на видео.
-		print(yt.title)
-		str(yt.title)
-		yt.title = yt.title.translate({ord(i): None for i in "/|#$'"})
-		
-		if server == "Stage":
-			yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/", yt.title + ".mp4")
-		else:
-			yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Andrey/", yt.title + ".mp4")
-		
-		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
-		btn1 = types.KeyboardButton("_Скачать видео_")
-		btn2 = types.KeyboardButton("_В начало_")
-		markup.add(btn1, btn2)
-		bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
-		                 reply_to_message_id=message.message_id, reply_markup=markup)
-		z = 0
-		logs()
+		elif z == 2:
+			if server == "Stage":
+				yt.streams.get_highest_resolution().download("/Users/s.ekker/PycharmProjects/TestVid/",
+				                                             yt.title + ".mp4")
+			else:
+				yt.streams.get_highest_resolution().download("/root/PycharmProjects/Bot/Andrey/", yt.title + ".mp4")
+			
+			markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
+			btn1 = types.KeyboardButton("_Скачать видео_")
+			btn2 = types.KeyboardButton("_В начало_")
+			markup.add(btn1, btn2)
+			bot.send_message(message.chat.id, text="Here you are".format(message.from_user),
+			                 reply_to_message_id=message.message_id, reply_markup=markup)
+			z = 0
+			logs()
 	
 	elif message.text == "_В начало_":
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, selective=True)
