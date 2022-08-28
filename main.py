@@ -28,7 +28,7 @@ else:
 	API_TOKEN = "5568655929:AAE0teKqI_xKja6RDLuK64HbpppSziMuaHQ"
 	APP_HOST = "127.0.0.1"
 	APP_PORT = "8444"
-	WEB_HOOK_URL = "https://56c5-95-165-162-211.ngrok.io"
+	WEB_HOOK_URL = "https://44cb-95-165-162-211.ngrok.io"
 
 # Создаем экземпляр бота
 y = yadisk.YaDisk(token="y0_AgAAAAAHTEDxAAhXAgAAAADMuVu-C3oK6uX2Sji3L4Zxa4JxIUv5bC4")
